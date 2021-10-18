@@ -24,22 +24,26 @@ $(document).ready(function () {
                 responsive: true,
                 "ajax": {
     
-                    "url": "/api/ListIntunePolicy?type=ESP&Tenantfilter=" + TenantID,
-                    "dataSrc": "",
+                    "url": "/api/ListMailboxes?Tenantfilter=" + TenantID,
+                    "dataSrc": ""
                 },
                 dom: 'fBlrtip',
                 buttons: [
                     { extend: 'copyHtml5', className: 'btn btn-primary btn-sm' },
-                    { extend: 'excelHtml5', className: 'btn btn-primary btn-sm', title: 'Intune Policy List - ' + TenantID + " - " + todayDate, exportOptions: {columns: [ 0,1 ]}   },
-                    { extend: 'csvHtml5', className: 'btn btn-primary btn-sm', title: 'Intune Policy List - ' + TenantID + " - " + todayDate, exportOptions: {columns: [ 0,1 ]}  },
-                    { extend: 'pdfHtml5', className: 'btn btn-primary btn-sm', orientation: 'landscape', title: 'Intune Policy List - ' + TenantID + " - " + todayDate, exportOptions: {columns: [ 0,1 ]} },
+                    { extend: 'excelHtml5', className: 'btn btn-primary btn-sm', title: 'Mailbox List - ' + TenantID + " - " + todayDate },
+                    { extend: 'csvHtml5', className: 'btn btn-primary btn-sm', title: 'Mailbox List - ' + TenantID + " - " + todayDate },
+                    { extend: 'pdfHtml5', className: 'btn btn-primary btn-sm', orientation: 'landscape', title: 'Mailbox List - ' + TenantID + " - " + todayDate, exportOptions: {columns: [ 0,1,2,4,5 ]} },
                 ],
                 "columns": [
+                    { "data": "UPN" },
                     { "data": "displayName" },
-                    { "data": "PolicyTypeName" },
+                    { "data": "primarySmtpAddress" },                
+                    { "data": "recipientType" },
+                    { "data": "recipientTypeDetails" },
+                    { "data": "AdditionalEmailAddresses" },
                     {
-                        "data": "id",
-                        render: function (id, type, row) { return '<a href=index.html?page=EditPolicy&Config&ID=' + id + '&Tenantfilter=' + TenantID + '><i class="fas fa-cog fa-fw"></i></a>'; }
+                        "data": "UPN",
+                        render: function (id, type, row) { return '<a href=index.html?page=MailboxMobileDevices&Mailbox=' + id + '&Tenantfilter=' + TenantID + ' title="Mobile Device Information"><i class="fas fa-mobile-alt fa-fw"></i></a>'; }
                     }
                 ],
                 "order": [[0, "asc"]],

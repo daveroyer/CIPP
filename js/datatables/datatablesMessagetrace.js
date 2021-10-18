@@ -1,12 +1,16 @@
 $(document).ready(function () {
     let searchParams = new URLSearchParams(window.location.search)
-    var TenantID = '';
-    if (searchParams.has('Tenantfilter')) {
-        TenantID = searchParams.get('Tenantfilter')
-    }
+    if (searchParams.has('confirmation')) {
+        var TenantID = searchParams.get('Tenantfilter')
+        var days = searchParams.get('Days')
+        var recipient = searchParams.get('Recipient')
+        var sender = searchParams.get('Sender')
+        $('#days').val(days)
+        $('#Recipient').val(recipient)
+        $('#Sender').val(sender)
 
-    var todayDate = new Date().toISOString().slice(0, 10);
-    if(TenantID !== '') {
+
+        var todayDate = new Date().toISOString().slice(0, 10);
         $('.datatable-1').dataTable(
             {
                 language: {
@@ -17,39 +21,37 @@ $(document).ready(function () {
                 },
                 "columnDefs": [
                     { "className": "dt-center", "targets": [-1] },
-    
+                    { "width": "10%", "targets": 0 }
+
                 ],
                 "deferRender": true,
                 "pageLength": 25,
                 responsive: true,
                 "ajax": {
-    
-                    "url": "/api/ListMailboxStatistics?Tenantfilter=" + TenantID,
+
+                    "url": "/api/ListMessagetrace?Tenantfilter=" + TenantID + '&days=' + days + '&recipient=' + recipient + '&sender=' + sender,
                     "dataSrc": "",
                 },
                 dom: 'fBlrtip',
                 buttons: [
                     { extend: 'copyHtml5', className: 'btn btn-primary btn-sm' },
-                    { extend: 'excelHtml5', className: 'btn btn-primary btn-sm', title: 'Mailbox Statistics - ' + TenantID + " - " + todayDate  },
+                    { extend: 'excelHtml5', className: 'btn btn-primary btn-sm', title: 'Mailbox Statistics - ' + TenantID + " - " + todayDate },
                     { extend: 'csvHtml5', className: 'btn btn-primary btn-sm', title: 'Mailbox Statistics - ' + TenantID + " - " + todayDate },
                     { extend: 'pdfHtml5', className: 'btn btn-primary btn-sm', orientation: 'landscape', title: 'Mailbox Statistics - ' + TenantID + " - " + todayDate },
                 ],
                 "columns": [
-                    { "data": "UPN" },
-                    { "data": "displayName" },
-                    { "data": "LastActive" },                
-                    { "data": "UsedGB" },
-                    { "data": "ItemCount" },
-                    { "data": "HasArchive" },
+                    { "data": "Date" },
+                    { "data": "RecipientAddress" },
+                    { "data": "SenderAddress" },
+                    { "data": "Subject" },
+                    { "data": "Status" }
                 ],
-                "order": [[0, "asc"]],
-            }
-        );
+                "order": [[0, "desc"]],
+            });
+        $('.dataTables_paginate').addClass("btn-group datatable-pagination");
+        $('.dataTables_paginate > a').wrapInner('<span />');
     }
-    else {
-        $("#AccountTable").append("<tr><td colspan='8'>Select a Tenant to get started.</td></tr>")
-    }
-    
-    $('.dataTables_paginate').addClass("btn-group datatable-pagination");
-    $('.dataTables_paginate > a').wrapInner('<span />');
 });
+
+
+

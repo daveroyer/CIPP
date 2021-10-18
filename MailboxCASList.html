@@ -6,7 +6,7 @@
                     <div class="col-auto mb-3">
                         <h1 class="page-header-title">
                             <div class="page-header-icon"><i data-feather="user"></i></div>
-                            Sharepoint List
+                            Mailbox Client Access Settings
                         </h1>
                     </div>
                     <div class="col-12 col-xl-auto mb-3">
@@ -26,41 +26,43 @@
     <!-- Main page content-->
     <div class="container-fluid px-4">
         <div><label for="exampleDataList" class="form-label">Tenant Selector</label>
-            <input autocomplete="off" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..."
-                style="width: 50%;" onkeyup='onInput()'>
+            <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..."
+                style="width: 50%;" oninput='onInput()'>
             <datalist id="datalistOptions">
                 <option value="Select a tenant" text="Select a tenant">
             </datalist>
         </div><br>
         <div class="card">
-            <div class="card-header">Sharepoint list</div>
+            <div class="card-header">Mailbox Client Access Settings</div>
             <div class="card-body">
                 <table id="datatablesSimple">
                     <table cellpadding="0" cellspacing="0" class="datatable-1 table table-striped" width="100%">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>UPN</th>
-                                <th>Last Active</th>
-                                <th>File Count (Total)</th>
-                                <th>Used (GB)</th>
-                                <th>Allocated (GB)</th>
-                                <th>URL</th>
-                                <th>Actions</th>
+                                <th>Display Name</th>
+                                <th>Primary Email</th>
+                                <th>ECP Enabled</th>
+                                <th>OWA Enabled</th>
+                                <th>IMAP Enabled</th>
+                                <th>POP Enabled</th>
+                                <th>MAPI Enabled</th>
+                                <th>EWS Enabled</th>
+                                <th>ActiveSync Enabled</th>
                             </tr>
                         </thead>
                         <tbody id='AccountTable'>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Name</th>
-                                <th>UPN</th>
-                                <th>Last Active</th>
-                                <th>File Count (Total)</th>
-                                <th>Used (GB)</th>
-                                <th>Allocated (GB)</th>
-                                <th>URL</th>
-                                <th>Actions</th>
+                                <th>Display Name</th>
+                                <th>Primary Email</th>
+                                <th>ECP Enabled</th>
+                                <th>OWA Enabled</th>
+                                <th>IMAP Enabled</th>
+                                <th>POP Enabled</th>
+                                <th>MAPI Enabled</th>
+                                <th>EWS Enabled</th>
+                                <th>ActiveSync Enabled</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -70,7 +72,7 @@
 </main>
 <script src="js/datatables/jquery.dataTables.js"></script>
 <script src="js/tenantlist.js"></script>
-<script src="js/datatables/datatablesSharepoint.js"></script>
+<script src="js/datatables/datatablesMailboxCAS.js"></script>
 
 </body>
 

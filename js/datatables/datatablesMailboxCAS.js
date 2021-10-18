@@ -24,30 +24,39 @@ $(document).ready(function () {
                 responsive: true,
                 "ajax": {
     
-                    "url": "/api/ListIntunePolicy?type=ESP&Tenantfilter=" + TenantID,
+                    "url": "/api/ListMailboxCAS?Tenantfilter=" + TenantID,
                     "dataSrc": "",
                 },
                 dom: 'fBlrtip',
                 buttons: [
                     { extend: 'copyHtml5', className: 'btn btn-primary btn-sm' },
-                    { extend: 'excelHtml5', className: 'btn btn-primary btn-sm', title: 'Intune Policy List - ' + TenantID + " - " + todayDate, exportOptions: {columns: [ 0,1 ]}   },
-                    { extend: 'csvHtml5', className: 'btn btn-primary btn-sm', title: 'Intune Policy List - ' + TenantID + " - " + todayDate, exportOptions: {columns: [ 0,1 ]}  },
-                    { extend: 'pdfHtml5', className: 'btn btn-primary btn-sm', orientation: 'landscape', title: 'Intune Policy List - ' + TenantID + " - " + todayDate, exportOptions: {columns: [ 0,1 ]} },
+                    { extend: 'excelHtml5', className: 'btn btn-primary btn-sm', title: 'Mailbox CAS Settings - ' + TenantID + " - " + todayDate },
+                    { extend: 'csvHtml5', className: 'btn btn-primary btn-sm', title: 'Mailbox CAS Settings - ' + TenantID + " - " + todayDate },
+                    { extend: 'pdfHtml5', className: 'btn btn-primary btn-sm', orientation: 'landscape', title: 'Mailbox CAS Settings - ' + TenantID + " - " + todayDate},
                 ],
                 "columns": [
                     { "data": "displayName" },
-                    { "data": "PolicyTypeName" },
-                    {
-                        "data": "id",
-                        render: function (id, type, row) { return '<a href=index.html?page=EditPolicy&Config&ID=' + id + '&Tenantfilter=' + TenantID + '><i class="fas fa-cog fa-fw"></i></a>'; }
-                    }
+                    { "data": "primarySmtpAddress" },                
+                    { "data": "ecpenabled" },
+                    { "data": "owaenabled" },
+                    { "data": "imapenabled" },
+                    { "data": "popenabled" },
+                    { "data": "mapienabled" },
+                    { "data": "ewsenabled" },
+                    { "data": "activesyncenabled" },
                 ],
+                'columnDefs': [
+                    {
+                        "targets": [2,3,4,5,6,7,8], // your case first column
+                        "className": "text-center"
+                   }
+                 ],
                 "order": [[0, "asc"]],
             }
         );
     }
     else {
-        $("#AccountTable").append("<tr><td colspan='8'>Select a Tenant to get started.</td></tr>")
+        $("#AccountTable").append("<tr><td colspan='9'>Select a Tenant to get started.</td></tr>")
     }
     
     $('.dataTables_paginate').addClass("btn-group datatable-pagination");
