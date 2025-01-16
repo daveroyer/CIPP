@@ -43,3 +43,4 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ASHY_GLACIER_0BF2DC80F }} # change this to your repository secret name
           action: "close"
+
